@@ -1,12 +1,10 @@
-# [Your Algorithm Name] - Interactive Visualization
+# Merge Sort and Heap Sort algorithms- Interactive Visualization
 
 ## Project Overview
 
 This project is an interactive web application that compares Merge Sort and Heap Sort algorithms with step-by-step visualizations, developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department.
 
 ## Algorithm Description
-
-[Provide a comprehensive explanation of your algorithm here. Include the following elements:]
 
 ### Problem Definition
 
