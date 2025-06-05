@@ -69,11 +69,11 @@ heapify(array, 1)
 
 ## Screenshots
 
-![Main Interface](docs\screenshots\main.png) 
-![Performance Analysis](docs\screenshots\performanceAnalysis.png) 
-![Heap Algorithm Steps](docs\screenshots\heapSteps.png) 
-![Merge Algorithm Steps](docs\screenshots\mergeSteps.png.png)
-![Algorithm Performance](docs\screenshots\algorithmPerformance.png)
+![Main Interface](docs/screenshots/main.png) 
+![Performance Analysis](docs/screenshots/performanceAnalysis.png) 
+![Heap Algorithm Steps](docs/screenshots/heapSteps.png) 
+![Merge Algorithm Steps](docs/screenshots/mergeSteps.png.png)
+![Algorithm Performance](docs/screenshots/algorithmPerformance.png)
 
 ## Installation
 
