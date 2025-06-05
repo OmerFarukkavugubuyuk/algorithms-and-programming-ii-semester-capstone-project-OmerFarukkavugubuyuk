@@ -50,7 +50,7 @@ if st.button("Start Sorting"):
         # Showing steps
         for i, step in enumerate(steps, 1):
             st.markdown(f"**Step {i}:**")
-            st.dataframe(pd.DataFrame(step, columns=["Value"]), hide_index=True)
+            st.write("Step:", step)
         
         st.success(f"Sorting complete! Total {len(steps)} steps.")
     
