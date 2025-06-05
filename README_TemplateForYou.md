@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is an interactive web application that compares Merge Sort and Heap Sort algorithms with step-by-step visualizations, developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department.
+This project is an interactive web application that compares Merge Sort and Heap Sort algorithms with step-by-step visualizations, developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department .
 
 ## Algorithm Description
 
