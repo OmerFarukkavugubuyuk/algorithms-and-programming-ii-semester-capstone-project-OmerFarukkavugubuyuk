@@ -1,75 +1,69 @@
-# deneme-algorithm.py
-
 def merge_sort(arr):
-    steps = []
+    steps = [arr.copy()]
+    comparisons = 0
+    swaps = 0
     
-    def merge_sort_recursive(arr, left, right):
-        if left < right:
-            mid = (left + right) // 2
-            merge_sort_recursive(arr, left, mid)
-            merge_sort_recursive(arr, mid + 1, right)
-            merge(arr, left, mid, right)
-            steps.append(arr.copy())  # Her bir birleşmeden sonra durumu kaydet
-
-    def merge(arr, left, mid, right):
-        left_part = arr[left:mid+1]
-        right_part = arr[mid+1:right+1]
+    def merge(left, right):
+        nonlocal comparisons, swaps
+        result = []
         i = j = 0
-        k = left
-
-        while i < len(left_part) and j < len(right_part):
-            if left_part[i] <= right_part[j]:
-                arr[k] = left_part[i]
+        
+        while i < len(left) and j < len(right):
+            comparisons += 1
+            if left[i] < right[j]:
+                result.append(left[i])
                 i += 1
             else:
-                arr[k] = right_part[j]
+                result.append(right[j])
                 j += 1
-            k += 1
-
-        while i < len(left_part):
-            arr[k] = left_part[i]
-            i += 1
-            k += 1
-
-        while j < len(right_part):
-            arr[k] = right_part[j]
-            j += 1
-            k += 1
-
-    temp_arr = arr.copy()
-    merge_sort_recursive(temp_arr, 0, len(temp_arr) - 1)
-    return temp_arr, steps
-
+            swaps += 1
+        
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+    
+    if len(arr) <= 1:
+        return arr, steps
+    
+    mid = len(arr) // 2
+    left, left_steps = merge_sort(arr[:mid])
+    right, right_steps = merge_sort(arr[mid:])
+    
+    # Tüm adımları birleştirme
+    all_steps = steps + left_steps + right_steps
+    merged = merge(left, right)
+    all_steps.append(merged)
+    
+    return merged, all_steps
 
 def heap_sort(arr):
-    steps = []
-
+    steps = [arr.copy()]
+    n = len(arr)
+    
     def heapify(arr, n, i):
         largest = i
-        l = 2 * i + 1
-        r = 2 * i + 2
-
-        if l < n and arr[l] > arr[largest]:
-            largest = l
-        if r < n and arr[r] > arr[largest]:
-            largest = r
-
+        left = 2 * i + 1
+        right = 2 * i + 2
+        
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+        
+        if right < n and arr[right] > arr[largest]:
+            largest = right
+        
         if largest != i:
             arr[i], arr[largest] = arr[largest], arr[i]
-            steps.append(arr.copy())  # Swap sonrası durumu kaydet
+            steps.append(arr.copy())
             heapify(arr, n, largest)
-
-    temp_arr = arr.copy()
-    n = len(temp_arr)
-
-    # Max heap oluştur
-    for i in range(n // 2 - 1, -1, -1):
-        heapify(temp_arr, n, i)
-
-    # Heap'ten çıkar
-    for i in range(n - 1, 0, -1):
-        temp_arr[i], temp_arr[0] = temp_arr[0], temp_arr[i]
-        steps.append(temp_arr.copy())  # Her swap sonrası
-        heapify(temp_arr, i, 0)
-
-    return temp_arr, steps
+    
+    # Max heap oluşturma
+    for i in range(n//2 - 1, -1, -1):
+        heapify(arr, n, i)
+    
+    # Heap'ten eleman çıkarma
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        steps.append(arr.copy())
+        heapify(arr, i, 0)
+    
+    return arr, steps
