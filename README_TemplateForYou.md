@@ -117,7 +117,7 @@ heapify(array, 1)
 
 2. Enter comma-separated numbers (e.g., "5,3,8,4,2")
 
-3. Click "Sıralamayı Başlat" (Start Sorting)
+3. Click "Start Sorting"
 
 4. View step-by-step sorting process
 
