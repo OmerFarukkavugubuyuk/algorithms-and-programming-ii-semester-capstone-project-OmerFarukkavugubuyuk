@@ -4,79 +4,80 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from algorithm import merge_sort, heap_sort
 
-# Sayfa ayarları
-st.set_page_config(page_title="Sıralama Algoritması Karşılaştırma", layout="wide")
+# Page settings and Layout
+st.set_page_config(page_title="Sorting Algorithm Comparison", layout="wide")
 
-# Başlık
-st.title("🧮 Merge Sort vs Heap Sort Karşılaştırması")
+# Title
+st.title("🧮 Comparison of Merge and Heap Sort")
 st.markdown("---")
 
-# Algoritma seçimi
-algorithm = st.radio("Sıralama Algoritması Seçin:", 
+# Choose sorting algorithm
+algorithm = st.radio("Choose a Sorting Algorithm:", 
                     ["Merge Sort", "Heap Sort"],
                     horizontal=True)
 
-# Dizi girişi
-user_input = st.text_input("Sıralanacak diziyi girin (virgülle ayırın):", 
+# Entering the array to sort
+user_input = st.text_input("Enter the array to sort (separate with commas):", 
                           "5,3,8,4,2,7,1,10")
 
 try:
-    arr = [int(x.strip()) for x in user_input.split(",")]
+    array = [int(x.strip()) for x in user_input.split(",")]
 except:
-    st.error("Geçersiz giriş! Lütfen sayıları virgülle ayırın (Örnek: 5,3,8,4)")
+    st.error("Invalid Input Please Seperate Numbers With Commas (Example: 5,3,8,4)")
     st.stop()
 
-# Sıralama butonu
-if st.button("Sıralamayı Başlat"):
+# Sorting button
+if st.button("Start Sorting"):
+    st.markdown("### 📊 Sorting Steps")
     st.markdown("---")
     
-    # Sonuçlar için tab oluşturma
-    tab1, tab2 = st.tabs(["Sıralama Adımları", "Performans Analizi"])
+    # Making table for results
+    tab1, tab2 = st.tabs(["Steps of Sorting", "Performance Analysis"])
     
     with tab1:
-        st.subheader(f"{algorithm} Sıralama Adımları")
+        st.subheader(f"{algorithm} Steps of Sorting")
         
-        # Algoritmayı çalıştırma
+        # Running the selected sorting algorithm
         if algorithm == "Merge Sort":
             start_time = time.time()
-            sorted_arr, steps = merge_sort(arr.copy())
+            sorted_arr, steps = merge_sort(array.copy())
             exec_time = time.time() - start_time
         else:
             start_time = time.time()
-            sorted_arr, steps = heap_sort(arr.copy())
+            sorted_arr, steps = heap_sort(array.copy())
             exec_time = time.time() - start_time
         
-        # Adımları gösterme
+        # Showing steps
         for i, step in enumerate(steps, 1):
-            st.markdown(f"**Adım {i}:**")
-            st.dataframe(pd.DataFrame(step, columns=["Değer"]), hide_index=True)
+            st.markdown(f"**Step {i}:**")
+            st.dataframe(pd.DataFrame(step, columns=["Value"]), hide_index=True)
         
-        st.success(f"Sıralama tamamlandı! Toplam {len(steps)} adım.")
+        st.success(f"Sorting complete! Total {len(steps)} steps.")
     
     with tab2:
-        st.subheader("⏱️ Performans Analizi")
+        st.subheader("⏱️ Performance Analysis")
         
         col1, col2 = st.columns(2)
-        col1.metric("Sıralama Süresi", f"{exec_time:.6f} saniye")
+        col1.metric("Sorting Time", f"{exec_time:.6f} seconds")
         
-        # Big-O bilgisi
-        col2.metric("Zaman Karmaşıklığı", "O(n log n)")
+        # Big-O information
+        col2.metric("Time Complexity", "O(n log n)")
         
-        # Karmaşıklık açıklaması
-        st.markdown("### 📊 Karmaşıklık Analizi")
+        # Explanation of complexity 
+        st.markdown("### 📊 Complexity Analysis")
         st.markdown("""
         | Metrik          | Merge Sort | Heap Sort |
         |----------------|------------|-----------|
-        | **En iyi durum**  | O(n log n) | O(n log n)|
-        | **Ortalama**      | O(n log n) | O(n log n)|
-        | **En kötü durum** | O(n log n) | O(n log n)|
-        | **Bellek**        | O(n)       | O(1)      |
+        | **Best Case**  | O(n log n) | O(n log n)|
+        | **Average**      | O(n log n) | O(n log n)|
+        | **Worst Case** | O(n log n) | O(n log n)|
+        | **Memory**        | O(n)       | O(1)      |
         """)
         
-        # Grafik
+        # Chart
         fig, ax = plt.subplots()
         ax.plot(range(len(steps)), [i+1 for i in range(len(steps))], 'b-')
-        ax.set_xlabel("Adım Sayısı")
-        ax.set_ylabel("İşlem Karmaşıklığı")
-        ax.set_title("Algoritma Performansı")
+        ax.set_xlabel("Number of Steps")
+        ax.set_ylabel("Process Complexity")
+        ax.set_title("Algorithm Performance")
         st.pyplot(fig)

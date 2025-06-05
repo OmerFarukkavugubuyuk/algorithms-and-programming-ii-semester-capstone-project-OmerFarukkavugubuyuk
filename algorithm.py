@@ -1,5 +1,5 @@
-def merge_sort(arr):
-    steps = [arr.copy()]
+def merge_sort(array):
+    steps = [array.copy()]
     comparisons = 0
     swaps = 0
     
@@ -22,48 +22,48 @@ def merge_sort(arr):
         result.extend(right[j:])
         return result
     
-    if len(arr) <= 1:
-        return arr, steps
+    if len(array) <= 1:
+        return array, steps
     
-    mid = len(arr) // 2
-    left, left_steps = merge_sort(arr[:mid])
-    right, right_steps = merge_sort(arr[mid:])
+    mid = len(array) // 2
+    left, left_steps = merge_sort(array[:mid])
+    right, right_steps = merge_sort(array[mid:])
     
-    # Tüm adımları birleştirme
+    # Combine all steps
     all_steps = steps + left_steps + right_steps
     merged = merge(left, right)
     all_steps.append(merged)
     
     return merged, all_steps
 
-def heap_sort(arr):
-    steps = [arr.copy()]
-    n = len(arr)
+def heap_sort(array):
+    steps = [array.copy()]
+    n = len(array)
     
-    def heapify(arr, n, i):
+    def heapify(arrayHeapify, n, i):
         largest = i
         left = 2 * i + 1
         right = 2 * i + 2
         
-        if left < n and arr[left] > arr[largest]:
+        if left < n and arrayHeapify[left] > arrayHeapify[largest]:
             largest = left
         
-        if right < n and arr[right] > arr[largest]:
+        if right < n and arrayHeapify[right] > arrayHeapify[largest]:
             largest = right
         
         if largest != i:
-            arr[i], arr[largest] = arr[largest], arr[i]
-            steps.append(arr.copy())
-            heapify(arr, n, largest)
+            arrayHeapify[i], arrayHeapify[largest] = arrayHeapify[largest], arrayHeapify[i]
+            steps.append(arrayHeapify.copy())
+            heapify(arrayHeapify, n, largest)
     
-    # Max heap oluşturma
+    # Creating max heap
     for i in range(n//2 - 1, -1, -1):
-        heapify(arr, n, i)
+        heapify(array, n, i)
     
-    # Heap'ten eleman çıkarma
+    # Removing elements from the heap
     for i in range(n-1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]
-        steps.append(arr.copy())
-        heapify(arr, i, 0)
+        array[i], array[0] = array[0], array[i]
+        steps.append(array.copy())
+        heapify(array, i, 0)
     
-    return arr, steps
+    return array, steps

@@ -71,11 +71,11 @@ heapify(array, 1)
 
 ## Screenshots
 
-![Main Interface](docs/screenshots/main_interface.png)
-*Application interface with algorithm selection and array input*
-
-![Algorithm Steps](docs/screenshots/algorithm_steps.png)
-*Step-by-step visualization of Merge Sort*
+![Main Interface](docs\screenshots\main.png) 
+![Performance Analysis](docs\screenshots\performanceAnalysis.png) 
+![Heap Algorithm Steps](docs\screenshots\heapSteps.png) 
+![Merge Algorithm Steps](docs\screenshots\mergeSteps.png.png)
+![Algorithm Performance](docs\screenshots\algorithmPerformance.png)
 
 ## Installation
 
