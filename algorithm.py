@@ -1,4 +1,4 @@
-# algorithm.py
+# deneme-algorithm.py
 
 def merge_sort(arr):
     steps = []
